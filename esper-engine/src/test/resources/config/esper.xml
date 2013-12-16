@@ -4,16 +4,29 @@
     xsi:schemaLocation="
 http://www.espertech.com/schema/esper
 http://www.espertech.com/schema/esper/esper-configuration-2.0.xsd">
-<event-type name="wunderground">
+<!-- <event-type name="wunderground"> -->
+<!--   <java-util-map> -->
+<!--     <map-property name="stationId" class="string"/> -->
+<!--     <map-property name="internalTime" class="long"/> -->
+<!--     <map-property name="observationTime" class="string"/> -->
+<!--     <map-property name="temperature" class="double"/>     -->
+<!--     <map-property name="relativeHumidity" class="double"/>     -->
+<!--     <map-property name="windDirection" class="double"/>     -->
+<!--     <map-property name="windSpeed" class="double"/>     -->
+<!--     <map-property name="airPressure" class="double"/>     -->
+<!--   </java-util-map> -->
+<!-- </event-type> -->
+<event-type name="hsl">
   <java-util-map>
-    <map-property name="stationId" class="string"/>
-    <map-property name="internalTime" class="long"/>
-    <map-property name="observationTime" class="string"/>
-    <map-property name="temperature" class="double"/>    
-    <map-property name="relativeHumidity" class="double"/>    
-    <map-property name="windDirection" class="double"/>    
-    <map-property name="windSpeed" class="double"/>    
-    <map-property name="airPressure" class="double"/>    
+    <map-property name="vehicleId" class="string"/>
+    <map-property name="route" class="string"/>
+    <map-property name="lat" class="double"/>
+    <map-property name="lon" class="double"/>    
+    <map-property name="bearing" class="double"/>    
+    <map-property name="direction" class="integer"/>    
+    <map-property name="previousStop" class="double"/>    
+    <map-property name="currentStop" class="double"/>
+    <map-property name="departure" class="string"/>    
   </java-util-map>
 </event-type>
 </esper-configuration>	
