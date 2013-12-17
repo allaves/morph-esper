@@ -21,13 +21,14 @@ class HslStreamerTest extends JUnitSuite {
 	@Before def setUpBeforeClass() {
 	    esper.startup()
 	    val proxy = new EsperProxy(esper.system)
-	    val demo = new HslStreamer("RHKL00040", "hsl", 1, proxy) 
+	    //val demo = new HslStreamer("RHKL00040", "hsl", 1, proxy) 
+	    val demo = new HslStreamer("RHKL00040", "hsl", 1, proxy)
 	    demo.schedule
 	    println("finish init")
 	}
 	
 	@Test def naiveTest() {
-	  Thread.sleep(10000)
+	  Thread.sleep(120000)
 	}
 	
 	@After def after(){

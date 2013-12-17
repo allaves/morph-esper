@@ -5,21 +5,11 @@ import scala.language.postfixOps
 import concurrent.duration._
 
 class HslStreamer(vehicleId:String, extent:String, rate:Int, proxy:EsperProxy) {
-  private val hsl = new Hsl(vehicleId)
+  private val hsl = new Hsl()
   //private var latestTime:Long = 0
   
-  def generateData = {
-    val data = hsl.getData
-//    if (data.internalTime > latestTime){
-//      latestTime=data.internalTime
-//	  Some(List("stationId"->data.stationId,	      
-//	     "internalTime"->data.internalTime,
-//	     "observationTime"->data.observationTime,
-//	     "airPressure"-> data.airPressure,
-//	     "temperature"->data.temperature,
-//	     "timestamp"-> data.windSpeed).toMap)	    
-//    }
-//	else None
+  def generateData(vehicleId: String) = {
+    val data = hsl.getData(vehicleId)
     
     Some(List("vehicleId" -> data.vehicleId,
     	"route" -> data.route,
@@ -36,9 +26,9 @@ class HslStreamer(vehicleId:String, extent:String, rate:Int, proxy:EsperProxy) {
     val eng = proxy.engine
     import  proxy.system.dispatcher
     proxy.system.scheduler.schedule(0 seconds, rate seconds) {
-      val tosend = generateData.get
-      println("Sending... " + tosend.mkString("--"))
-      eng ! es.upm.fi.oeg.morph.esper.Event(extent,tosend)
+      val tosend = generateData(vehicleId).get
+      println("Sending... " + tosend)
+      eng ! es.upm.fi.oeg.morph.esper.Event(extent, tosend)
     }             
   }
 }
